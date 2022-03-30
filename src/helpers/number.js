@@ -1,6 +1,6 @@
 /**
  * Checks if value of n is a numeric one
- * http://jsperf.com/isnan-vs-isnumeric/4
+ * Fixed https://security.snyk.io/vuln/SNYK-JS-HANDSONTABLE-1726770
  * @param n
  * @returns {boolean}
  */
@@ -8,11 +8,13 @@ export function isNumeric(n) {
   /* eslint-disable */
   var t = typeof n;
 
-  return t == 'number' ? !isNaN(n) && isFinite(n) :
-    t == 'string' ? !n.length ? false :
-      n.length == 1 ? /\d/.test(n) :
-        /^\s*[+-]?\s*(?:(?:\d+(?:\.\d+)?(?:e[+-]?\d+)?)|(?:0x[a-f\d]+))\s*$/i.test(n) :
-      t == 'object' ? !!n && typeof n.valueOf() == 'number' && !(n instanceof Date) : false;
+  if (t === 'number') return !isNaN(n) && isFinite(n);
+  if (t === 'object') return !!n && typeof n.valueOf() === 'number' && !(n instanceof Date);
+  if (t === 'string') {
+    var str = n.replaceAll(/\s+/g, '')
+    return !isNaN(str) && !isNaN(parseFloat(str));
+  }
+  return false;
 }
 
 /**
