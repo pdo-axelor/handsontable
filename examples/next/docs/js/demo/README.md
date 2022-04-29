@@ -1,5 +1,7 @@
 # Demo
 
+## This line is changed only to trigger CI
+
 ## Description
 
 This is a general purpose demo that showcases the most popular features of Handsontable in JavaScript.
