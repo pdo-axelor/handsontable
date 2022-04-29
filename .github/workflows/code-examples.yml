@@ -465,8 +465,8 @@ jobs:
       # Temporary solution for a problem with installing the examples' dependencies.
       # See: https://github.com/npm/cli/issues/4774
 
-      - name: (Temporary) Install npm@8.5
-        run: npm i -g npm@8.5
+      - name: (Temporary) Install npm@8.8
+        run: npm i -g npm@8.8
       # ------------
 
       - name: Install dependencies for examples/${{ matrix.version }}/docs/${{ matrix.framework }}
